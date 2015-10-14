@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
+    - { resource: services/user-management/services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -78,3 +78,33 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    service:
+      user_manager: pugx_user_manager
+
+pugx_multi_user:
+  users:
+    teacher:
+        entity:
+          class: AppBundle\Entity\Teacher
+        registration:
+          form:
+            type: AppBundle\Form\UserManagement\Type\RegistrationFormType
+            name: fos_user_registration_form
+            validation_groups:  [Registration, Default]
+          template:
+            user-management/teacher/register.html.twig
+    student:
+        entity:
+          class: AppBundle\Entity\Student
+        registration:
+          form:
+            type: AppBundle\Form\UserManagement\Type\RegistrationFormType
+            name: fos_user_registration_form
+            validation_groups:  [Registration, Default]
+          template:
+            user-management/student/register.html.twig

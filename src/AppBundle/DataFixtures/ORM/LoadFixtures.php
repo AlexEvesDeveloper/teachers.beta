@@ -24,7 +24,10 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
 
     private function loadActivities(ObjectManager $manager)
     {
-        $athletics = $this->loadAthletics($manager);
+        $activities = array();
+        $activities['athletics'] = $this->loadAthletics($manager);
+
+        return $activities;
     }
 
     private function loadAthletics(ObjectManager $manager)

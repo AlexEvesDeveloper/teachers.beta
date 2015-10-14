@@ -46,7 +46,6 @@ class Activity
         $this->addCategory($defaultCategory);
     }
 
-
     /**
      * Get id
      *
