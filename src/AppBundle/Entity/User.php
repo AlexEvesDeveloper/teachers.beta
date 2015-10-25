@@ -26,30 +26,62 @@ abstract class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="Please enter your first name.")
      * @Assert\Length(
      *     min=3,
      *     max="255",
      *     minMessage="The name is too short.",
-     *     maxMessage="The name is too long.",
-     *     groups={"Registration", "Profile"}
+     *     maxMessage="The name is too long."
      * )
      */
-    protected $name;
+    protected $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank(message="Please enter your last name.")
+     * @Assert\Length(
+     *     min=3,
+     *     max="255",
+     *     minMessage="The name is too short.",
+     *     maxMessage="The name is too long."
+     * )
+     */
+    protected $lastName;
 
     /**
      * @return mixed
      */
-    public function getName()
+    public function getFirstName()
     {
-        return $this->name;
+        return $this->firstName;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $firstName
+     * @return $this
      */
-    public function setName($name)
+    public function setFirstName($firstName)
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     * @return $this
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+        return $this;
     }
 }
